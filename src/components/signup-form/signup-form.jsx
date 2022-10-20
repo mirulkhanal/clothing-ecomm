@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   createAuthUserWithCredentials,
   createUserFromAuth,
-} from '../../utils/firebase/firebase';
-import FormInput from '../form-input/FormInput';
-import Button from '../button/Button'
+} from "../../utils/firebase/firebase";
+import FormInput from "../form-input/FormInput";
+import Button from "../button/Button";
 
-import './signup-form.scss';
+import "./signup-form.scss";
 const SignupForm = () => {
   const defaultFormFields = {
-    displayName: '',
-    password: '',
-    email: '',
-    confirmPassword: '',
+    displayName: "",
+    password: "",
+    email: "",
+    confirmPassword: "",
   };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -23,14 +23,13 @@ const SignupForm = () => {
       ...formFields,
       [name]: value,
     });
-    console.log(formFields);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formFields.password !== formFields.confirmPassword) {
-      alert('Passwords dont match');
+      alert("Passwords dont match");
       return;
     }
 
@@ -42,59 +41,59 @@ const SignupForm = () => {
 
       await createUserFromAuth(user, { displayName: formFields.displayName });
       setFormFields(defaultFormFields);
-      alert('success registration');
+      alert("success registration");
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Signup Failed, Email already in use');
+      if (error.code === "auth/email-already-in-use") {
+        alert("Signup Failed, Email already in use");
       }
       console.log(error.message);
     }
   };
   return (
-    <div className='sign-up-container'>
+    <div className="sign-up-container">
       <h2>Dont have an account?</h2>
       <span>Sign up with your Email and Password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label='Display Name'
+          label="Display Name"
           required
-          type='text'
-          name='displayName'
+          type="text"
+          name="displayName"
           onChange={handleFieldChange}
           value={formFields.displayName}
         />
 
         {/* <label>Email</label> */}
         <FormInput
-          label='Email'
+          label="Email"
           required
-          type='email'
-          name='email'
+          type="email"
+          name="email"
           onChange={handleFieldChange}
           value={formFields.email}
         />
 
         {/* <label>Password</label> */}
         <FormInput
-          label='Password'
+          label="Password"
           required
-          type='password'
-          name='password'
+          type="password"
+          name="password"
           onChange={handleFieldChange}
           value={formFields.password}
         />
 
         {/* <label>Confirm Password</label> */}
         <FormInput
-          label='Confirm Password'
+          label="Confirm Password"
           required
-          type='password'
-          name='confirmPassword'
+          type="password"
+          name="confirmPassword"
           onChange={handleFieldChange}
           value={formFields.confirmPassword}
         />
 
-        <Button type='submit'>Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
