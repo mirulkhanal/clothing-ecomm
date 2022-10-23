@@ -23,6 +23,7 @@ export const UserProvider = ({ children }) => {
 
     return unsubscribe;
   }, []);
+
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}

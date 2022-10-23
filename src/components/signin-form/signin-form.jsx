@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useState } from "react";
 import {
-  createUserFromAuth,
   signInAuthUserWithCredentials,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase";
